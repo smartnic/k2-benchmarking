@@ -32,6 +32,6 @@ build_instance(){
 }
 
 build_instance "18.1.6"
-#build_instance "15.0.0"
-#build_instance "12.0.0"
-#build_instance "9.0.0"
+build_instance "15.0.0"
+build_instance "12.0.0"
+build_instance "9.0.0"

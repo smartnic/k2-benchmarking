@@ -1,0 +1,2 @@
+1) '.config' replaces its counterpart in the root Linux directory; it enables the necessary settings required to compile/run eBPF programs.
+2) 'syscall_nrs.c' replaces its counterpart in /samples/bpf with the addition of line 6. Without this addition, running the makefile in samples/bpf gave a warning that was treated as an error.

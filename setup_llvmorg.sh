@@ -5,6 +5,7 @@ build_llvm(){
 	local folder="llvmorg-$version"
 
 	if [ -d $folder ]; then
+    	echo "$folder: directory already exists"
 		return
 	fi
 
@@ -13,7 +14,7 @@ build_llvm(){
 	cd $folder
 
 	if [ $version == "12.0.0" ]; then
-		cp ../overrides/llvmorg-12.0.0/Signals.h llvm/include/llvm/Support/Signals.h
+		cp ../extra/llvmorg-12.0.0/Signals.h llvm/include/llvm/Support/Signals.h
 	fi
 
 	mkdir build && cd build
@@ -22,11 +23,13 @@ build_llvm(){
 	cd ../..
 }
 
+# For versions <= 9.0.0 (these do not use a monorepo structure)
 build_llvm_legacy(){
 	local version=$1
 	local folder="llvmorg-$version"
 
 	if [ -d $folder ]; then
+    	echo "$folder: directory already exists"
 		return
 	fi
 
@@ -46,9 +49,9 @@ build_llvm_legacy(){
 	rename "s/-$version\.src$//" *
 	mv cfe clang
 
-	cp ../overrides/llvmorg-9.0.0/benchmark_register.h llvm/utils/benchmark/src/benchmark_register.h
-	cp ../overrides/llvmorg-9.0.0/MicrosoftDemangle.h llvm/include/llvm/Demangle/MicrosoftDemangle.h
-	cp ../overrides/llvmorg-9.0.0/MicrosoftDemangleNodes.h llvm/include/llvm/Demangle/MicrosoftDemangleNodes.h
+	cp ../extra/llvmorg-9.0.0/benchmark_register.h llvm/utils/benchmark/src/benchmark_register.h
+	cp ../extra/llvmorg-9.0.0/MicrosoftDemangle.h llvm/include/llvm/Demangle/MicrosoftDemangle.h
+	cp ../extra/llvmorg-9.0.0/MicrosoftDemangleNodes.h llvm/include/llvm/Demangle/MicrosoftDemangleNodes.h
 
 	mkdir build && cd build
 	cmake -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
@@ -56,7 +59,9 @@ build_llvm_legacy(){
 	cd ../..
 }
 
-build_llvm "18.1.6"
-build_llvm "15.0.0"
-build_llvm "12.0.0"
-build_llvm_legacy "9.0.0"
+mapfile -t versions < "llvmorg_versions.txt"
+
+for version in "${versions[@]}"; do
+	echo "Attempting to build llvmorg-$version..."
+	build_llvm $version
+done

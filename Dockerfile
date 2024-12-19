@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
 	libssl-dev         \
 	rsync              \
 	python3            \
+	python3-pip        \
 	cmake              \
 	g++                \
 	rename             \
@@ -21,13 +22,20 @@ RUN apt-get update && apt-get install -y \
 	iputils-ping       \
 	&& rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install prettytable
+
 WORKDIR /usr/src/app
 
-COPY overrides overrides
+COPY llvmorg_versions.txt llvmorgs_versions.txt
+COPY target_object_files.txt target_object_files.txt
+COPY target_program_files.txt target_program_files.txt
+COPY extra extra
 COPY setup.sh setup.sh
 COPY build.sh build.sh
 COPY run.sh run.sh
-COPY setup_bpf-elf-tools.sh setup_bpf-elf-tools.sh
+COPY table.py table.py
+COPY setup_ebpf-extractor.sh setup_ebpf-extractor.sh
+COPY setup_k2-window-generator.sh setup_k2-window-generator.sh
 COPY setup_linux.sh setup_linux.sh
 COPY setup_llvmorg.sh setup_llvmorg.sh
 COPY setup_superopt.sh setup_superopt.sh

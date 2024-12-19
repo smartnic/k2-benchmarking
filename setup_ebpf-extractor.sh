@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ -d ebpf-extractor ]; then
-        exit 1
+	echo "ebpf-extractor: directory already exists"
+	exit 1
 fi
 
 git clone https://github.com/smartnic/ebpf-extractor.git

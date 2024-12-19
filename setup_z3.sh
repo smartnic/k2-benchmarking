@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ -d z3 ]; then
-        exit 1
+	echo "z3: directory already exists"
+	exit 1
 fi
 
 git clone https://github.com/Z3Prover/z3.git

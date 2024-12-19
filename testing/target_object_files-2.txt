@@ -1,0 +1,9 @@
+syscall_tp_kern.o
+cpustat_kern.o
+map_perf_test.bpf.o
+tcp_clamp_kern.o
+tracex3.bpf.o
+xdp_sample.bpf.o
+test_map_in_map.bpf.o
+tcp_cong_kern.o
+tcp_dumpstats_kern.o

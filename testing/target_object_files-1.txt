@@ -1,0 +1,5 @@
+sockex1_kern.o
+sockex2_kern.o
+sockex3_kern.o
+spintest.bpf.o
+xdp_sample.bpf.o

@@ -1,0 +1,42 @@
++--------------------------------------------------------------------------------------+
+|                                Number of Instructions                                |
++-------------------------+---------+-----------+----------+-----------+---------------+
+|         Program         | Version | Before K2 | After K2 | Reduction | Reduction (%) |
++-------------------------+---------+-----------+----------+-----------+---------------+
+|        bpf_clamp        |  12.0.0 |    105    |    92    |     13    |     12.38%    |
+|        bpf_clamp        |  15.0.0 |    105    |    92    |     13    |     12.38%    |
+|        bpf_clamp        |  18.1.6 |    101    |    87    |     14    |     13.86%    |
+|         bpf_cong        |  12.0.0 |     56    |    43    |     13    |     23.21%    |
+|         bpf_cong        |  15.0.0 |     56    |    43    |     13    |     23.21%    |
+|         bpf_cong        |  18.1.6 |     52    |    43    |     9     |     17.31%    |
+|        bpf_prog1        |  12.0.0 |    N/A    |   N/A    |    N/A    |      N/A      |
+|        bpf_prog1        |  15.0.0 |    N/A    |   N/A    |    N/A    |      N/A      |
+|        bpf_prog1        |  18.1.6 |    N/A    |   N/A    |    N/A    |      N/A      |
+| stress_array_map_lookup |  12.0.0 |    262    |   261    |     1     |     0.38%     |
+| stress_array_map_lookup |  15.0.0 |    262    |   261    |     1     |     0.38%     |
+| stress_array_map_lookup |  18.1.6 |    266    |   N/A    |    N/A    |      N/A      |
+|  stress_hash_map_lookup |  12.0.0 |    262    |   N/A    |    N/A    |      N/A      |
+|  stress_hash_map_lookup |  15.0.0 |    262    |   N/A    |    N/A    |      N/A      |
+|  stress_hash_map_lookup |  18.1.6 |    266    |   N/A    |    N/A    |      N/A      |
+|    stress_hmap_alloc    |  12.0.0 |     33    |    33    |     0     |     0.00%     |
+|    stress_hmap_alloc    |  15.0.0 |     33    |    33    |     0     |     0.00%     |
+|    stress_hmap_alloc    |  18.1.6 |     37    |    37    |     0     |     0.00%     |
+|       stress_hmap       |  12.0.0 |     33    |    33    |     0     |     0.00%     |
+|       stress_hmap       |  15.0.0 |     33    |    33    |     0     |     0.00%     |
+|       stress_hmap       |  18.1.6 |     37    |    37    |     0     |     0.00%     |
+|  td_xdp_cpumap_enqueue  |  12.0.0 |    N/A    |   N/A    |    N/A    |      N/A      |
+|  td_xdp_cpumap_enqueue  |  15.0.0 |    N/A    |   N/A    |    N/A    |      N/A      |
+|  td_xdp_cpumap_enqueue  |  18.1.6 |    N/A    |   N/A    |    N/A    |      N/A      |
+|    td_xdp_devmap_xmit   |  12.0.0 |    N/A    |   N/A    |    N/A    |      N/A      |
+|    td_xdp_devmap_xmit   |  15.0.0 |    N/A    |   N/A    |    N/A    |      N/A      |
+|    td_xdp_devmap_xmit   |  18.1.6 |    N/A    |   N/A    |    N/A    |      N/A      |
+|     tp_xdp_exception    |  12.0.0 |     78    |    78    |     0     |     0.00%     |
+|     tp_xdp_exception    |  15.0.0 |     77    |    77    |     0     |     0.00%     |
+|     tp_xdp_exception    |  18.1.6 |     67    |    67    |     0     |     0.00%     |
+|     trace_enter_exit    |  12.0.0 |     24    |   N/A    |    N/A    |      N/A      |
+|     trace_enter_exit    |  15.0.0 |     24    |   N/A    |    N/A    |      N/A      |
+|     trace_enter_exit    |  18.1.6 |     24    |   N/A    |    N/A    |      N/A      |
+|    trace_sys_connect    |  12.0.0 |    255    |   N/A    |    N/A    |      N/A      |
+|    trace_sys_connect    |  15.0.0 |    249    |   246    |     3     |     1.20%     |
+|    trace_sys_connect    |  18.1.6 |    249    |   246    |     3     |     1.20%     |
++-------------------------+---------+-----------+----------+-----------+---------------+

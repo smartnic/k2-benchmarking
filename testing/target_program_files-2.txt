@@ -1,0 +1,12 @@
+bpf_clamp
+bpf_cong
+bpf_prog1
+stress_array_map_lookup
+stress_hash_map_lookup
+stress_hmap_alloc
+stress_hmap
+td_xdp_cpumap_enqueue
+td_xdp_devmap_xmit
+tp_xdp_exception
+trace_enter_exit
+trace_sys_connect

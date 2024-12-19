@@ -1,0 +1,10 @@
+bpf_func_ip
+bpf_func_ipv6
+bpf_func_mpls
+bpf_func_vlan
+bpf_prog1
+p15
+raw_spin_lock
+spin_on_owner
+tp_xdp_redirect
+tp_xdp_exception

@@ -75,3 +75,57 @@ Each project below was also created as part of the independent study effort. Eac
 1) https://github.com/smartnic/ebpf-instruction-resolver
 2) https://github.com/smartnic/ebpf-inline-testing
 3) https://github.com/smartnic/ebpf-reassembler
+
+### Future steps
+
+#### 1
+_GOAL_: Utilize non-generic versions of the .desc files, which include two parameters: pgm_input_type and max_pkt_sz. Currently, there is a single file located in the "extra" directory that is used for all eBPF programs, but this may lead to erroneous behavior, as there are different types of eBPF programs, and programs can interact differently with different packet sizes.
+
+- It may be possible to auto-generate one or both of these values, but this may prove to be too much of an effort, and can be left instead to people using this benchmarking utility.
+- pgm_input_type is an integer in the .desc file, but a proper mapping can likely be obtained through exploration of how K2 internally maps this value to a more verbose description.
+- similarly, it may be the case that a very large value of max_pkt_sz can work for all eBPF programs (or perhaps the opposite). Further examination of this value is recommended.
+
+#### 2
+_GOAL_: Allow for K2 to work on additional types of eBPF programs.
+
+- From testing, several errors occurred when K2 ran on some programs, which likely stems from the fact that K2 does not cover all eBPF program types.
+- This is a much more open-ended and extensive goal, but it is still important to mention.
+
+#### 3
+_GOAL_: Create a folder that users can place already-compiled object files in to run K2 on.
+
+- Currently, this has not been implemented because the compiler version associated with an object file would not be explicitly obtainable.
+- However, it could still be very useful for benchmarking, nonetheless, and would be relatively trivial to implement.
+
+#### 4
+_GOAL_: Create a tool that would place post-K2-optimized bytecode back into an object file.
+
+- This has been attempted for very simple cases (i.e., no maps and relos) through the ebpf-reassembler repository.
+- But for more complex cases, option 2 as described in 'notes.txt' in ebpf-reassembler is likely the best choice to pursue.
+- Likely the most fruitful endeavor in the list of future steps, as it can have a very wide use case.
+- But conversely, it requires extensive knowledge/research/testing of ELF files, and it may suffer if the eBPF object file specification changes over time.
+
+#### 5
+_GOAL_: Add additional eBPF compilers to the benchmarking utility
+
+- Currently, this tool compares different versions of clang, but it would also be extremely useful to make comparisons of say, the best version of clang and the best version of gcc.
+
+#### 6
+_GOAL_: Add additional metric testing methods
+
+- Currently, the only metric is the # of instructions reduced (a) after clang compilation and (b) after K2 compilation. This metric was quite easy to implement because the hardware does not necessarily bias results, unlike a metric such as the time taken to compile.
+- However, other metrics, such as throughput testing, can also be included in the 2 aforementioned steps.
+- These metrics would most likely require more sophisticated testing environments, such as CloudLab.
+
+#### 7
+_GOAL_: Add ease-of-access for changing Linux versions
+
+- The current version of Linux in this repository is hardcoded to 6.9, which can become outdated in the future and lead to incompatibilities with older clang versions (e.g. 9.0.0, which is the case right now).
+- This should be easy to implement, but as shown with the files in extra/linux, several files may have to be overridden to ensure everything, such as the Makefile in samples/bpf running, works correctly.
+
+#### 8
+_GOAL_: Modify K2 itself for better compilation.
+
+- Similar to goal (2), this is an open-ended and extensive undertaking, as MANY optimizations can be pursued to achieve faster compilation times and better program compression.
+- An example I personally found very interesting is one mentioned by Prof. Narayana, describing a process to run a system of equations on many eBPF programs to obtain eBPF instruction costs that are unique to a user's hardware. For example, if {a, b, c} are eBPF instructions, one example program would be 3a + 5b + 9c = {program runtime}, and several of these would be provided to solve for {a, b, c}. This would provide more accurate heuristics for the "true cost" of an eBPF program during the local search process in K2.
+- Besides more accurate program costs, other places to target could include the search algorithm itself.
